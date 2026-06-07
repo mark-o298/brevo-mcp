@@ -3,14 +3,13 @@
  */
 
 import { BrevoMCPServer } from './server/mcp-server.js';
-import { createMcpHandler } from 'mcp-handler'; // Nutzen Sie das Vercel mcp-handler Paket
+import { createMcpHandler } from 'mcp-handler';
 
-// 1. Instanziieren Sie die Server-Logik aus Ihrem Template
+// 1. Instanziieren Sie die Server-Logik
 const brevoMcp = new BrevoMCPServer();
 
-// 2. Erstellen Sie den HTTP-Handler für Vercels Serverless Functions
+// 2. Erstellen Sie den HTTP-Handler für Vercel
 const handler = createMcpHandler((server) => {
-  // Übertragen Sie die registrierten Tools und Ressourcen auf den Web-Server
   if (brevoMcp.tools) {
     server.tools = brevoMcp.tools;
   }
@@ -19,6 +18,6 @@ const handler = createMcpHandler((server) => {
   }
 });
 
-// 3. Exportieren Sie die Routen-Methoden, die Vercel für Webanfragen erwartet
+// 3. Exportieren Sie die Routen-Methoden für Webanfragen
 export const GET = handler;
 export const POST = handler;
